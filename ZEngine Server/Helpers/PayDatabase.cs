@@ -100,13 +100,10 @@ namespace ZEngine_Server.Helpers
                     }
                     else
                     {
-                        data[0] = reader[0].ToString();
-                        data[1] = reader[1].ToString();
-                        data[2] = reader[2].ToString();
-                        data[3] = reader[3].ToString();
-                        data[4] = reader[4].ToString();
-                        data[5] = reader[5].ToString();
-                        data[6] = reader[6].ToString();
+                        for(int i = 0; i < 6; i++) //six rows
+                        {
+                            data[i] = reader[i].ToString();
+                        }
                     }
                 }
 
