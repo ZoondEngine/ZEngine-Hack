@@ -172,13 +172,19 @@ namespace ZEngine_Server.Library.IDB
             }
         }
 
-        private string CreateConnectionArgs()
+        private string CreateConnectionArgs(string[] args = null)
         {
-            string[] args = new string[]
+            if (args == null)
             {
-                "localhost", "root", "zeserver", "12589635", "True"
-            };
+                AppendConfiguration();
+                args = new string[4];
+            }
+            else
+            {
+                AppendConfiguration(args[0], args[1], args[2], args[3]);
+            }
 
+            p_Configuration.Values.CopyTo(args, 0);
             string line = Parse("server=?;user=?;database=?;password=?;Convert Zero Datetime=True", args);
 
             return line;
