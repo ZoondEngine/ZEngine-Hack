@@ -49,7 +49,7 @@ namespace ZEngine_Server.Library
 
                 for (int m = 0; m < data.Length; m++)
                 {
-                    cipher[m] = (byte)(data[m] ^ keyItem());
+                    cipher[m] = (byte)(data[m] ^ KeyItem());
                 }
 
                 return cipher;
@@ -62,7 +62,7 @@ namespace ZEngine_Server.Library
 
             // Pseudo-Random Generation Algorithm 
             // Генератор псевдослучайной последовательности 
-            private byte keyItem()
+            private byte KeyItem()
             {
                 x = (x + 1) % 256;
                 y = (y + S[x]) % 256;
