@@ -9,6 +9,7 @@ namespace ZEngine_Server
     public static class IGC
     {
         internal static Library.Automatic Automatic = new Library.Automatic();
+        internal static Library.ION.Network Network = new Library.ION.Network();
 
         internal static Helpers.TrashCleaner Cleaner = new Helpers.TrashCleaner();
         internal static Helpers.IOStackHelper IOStack = new Helpers.IOStackHelper();

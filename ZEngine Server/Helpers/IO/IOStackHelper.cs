@@ -33,6 +33,7 @@ namespace ZEngine_Server.Helpers
             uniqueCollection.Add("cmdtime", Tasks.UniqueTasks.OnCmdTime);
             uniqueCollection.Add("cmdstart", Tasks.UniqueTasks.OnCmdStart);
             uniqueCollection.Add("cmdstop", Tasks.UniqueTasks.OnCmdStop);
+            uniqueCollection.Add("clientsetban", Tasks.UniqueTasks.OnClientSetBan);
 
             //Parametrized commands
             parametrizedCollection.Add("cmdtime", Tasks.ParametrizedTasks.OnCmdTimeSet);
@@ -51,6 +52,7 @@ namespace ZEngine_Server.Helpers
             commandsDescriptions.Add("/cmd start", "Start command listener module");
             commandsDescriptions.Add("/cmd stop", "Stop command listener module");
             commandsDescriptions.Add("/timer set interval -p [-l]", "Setting cleaner timer. Attr: [-l] switched type setting (once or all)");
+            commandsDescriptions.Add("/client set ban [0:1]", "Set client ban value. Using 0 or 1.");
 
             $"[IO]: Helper '{typeof(IOStackHelper).Name}' for module 'IO' initializing ...".ToColor(String.Colors.Blue);
             AddCommandDescriptionsCollection(commandsDescriptions);
@@ -217,6 +219,32 @@ namespace ZEngine_Server.Helpers
                 foreach(var command in descriptions)
                 {
                     $"[IO]: {command.Key} - {command.Value}".ToColor(String.Colors.Olive);
+                }
+            }
+
+            public static void OnClientSetBan()
+            {
+                "[IO]: Enter the client hwid: ".ToColor(String.Colors.DeepPink);
+                string hwid = Console.ReadLine();
+
+                "[IO]: Enter the ban value (1 or 0): ".ToColor(String.Colors.DeepPink);
+                string value = Console.ReadLine();
+
+                if (value == "0")
+                {
+                    IGC.ClientsDatabase.ManualQuery("UPDATE clients SET ban='False' WHERE hwid='?'", new string[] { hwid });
+
+                    $"[IO]: Client '{hwid}' has been unbanned.".ToColor(String.Colors.ForestGreen);
+                }
+                else if(value == "1")
+                {
+                    IGC.ClientsDatabase.ManualQuery("UPDATE clients SET ban='True' WHERE hwid='?'", new string[] { hwid });
+
+                    $"[IO]: Client '{hwid}' has been banned.".ToColor(String.Colors.DarkRed);
+                }
+                else
+                {
+                    $"[IO]: Incorrect value for 'ban_type'. Must be a '1 or 0'.".ToColor(String.Colors.DarkRed);
                 }
             }
         }

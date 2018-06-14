@@ -65,7 +65,13 @@
     <Compile Include="Helpers\IO\IOStackHelper.cs" />
     <Compile Include="Helpers\ICLE\TrashCleaner.cs" />
     <Compile Include="IGC.cs" />
-    <Compile Include="Library\ION\Connection.cs" />
+    <Compile Include="Library\ION\Buffer.cs" />
+    <Compile Include="Library\ION\Exceptions\NetworkBufferException.cs" />
+    <Compile Include="Library\ION\Exceptions\NetworkCommandException.cs" />
+    <Compile Include="Library\ION\Exceptions\NetworkException.cs" />
+    <Compile Include="Library\ION\Exceptions\PacketsException.cs" />
+    <Compile Include="Library\ION\Network.cs" />
+    <Compile Include="Library\ION\Packets.cs" />
     <Compile Include="Library\ITM\Automatic.cs" />
     <Compile Include="Library\IDB\Database.cs" />
     <Compile Include="Library\IDB\Exceptions\KeyExistsInCollectionException.cs" />

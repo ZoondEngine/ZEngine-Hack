@@ -38,6 +38,11 @@ namespace ZEngine_Server.Helpers.IDB
             return Exact<bool>(p_QueryCollection["update_clients_where_hwid"], parameters);
         }
 
+        public bool ManualQuery(string query, string[] parameters)
+        {
+            return Exact<bool>(query, parameters);
+        }
+
         public string[] LoadUser(string hwid)
         {
             string[] user = null;

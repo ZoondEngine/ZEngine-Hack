@@ -18,6 +18,10 @@ namespace ZEngine_Server.Helpers.IDB
         public void ShowStartInformation()
         {
             var reader = Exact<MySqlDataReader>(p_QueryCollection["select_all_from_clients"], null);
+            if(reader == null)
+            {
+                return;
+            }
 
             $"[IDB]: Scanning 'clients' database ...".ToColor(String.Colors.DarkCyan);
 

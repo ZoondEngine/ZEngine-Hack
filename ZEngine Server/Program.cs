@@ -36,6 +36,7 @@ namespace ZEngine_Server
             Console.WriteLine();
 
             $"[STACK]: Module 'ION' loading ...".ToColor(String.Colors.Blue);
+            IGC.Network.Listen();
             Console.WriteLine();
 
             $"[STACK]: Module 'IO' loading ...".ToColor(String.Colors.Blue);
@@ -70,7 +71,7 @@ namespace ZEngine_Server
             Console.WriteLine("======[SERVER INFORMATION]===================================================\n");
             Console.WriteLine("[PNAME]     >> ZEngine Server Application");
             Console.WriteLine($"[PVERSION]  >> {AppSettings.VersionInfo.THREAD}, {AppSettings.VersionInfo.FULL_VERSION}");
-            Console.WriteLine("[PAUTHOR]   >> ZEngine Laboratory");
+            Console.WriteLine("[PAUTHOR]   >> RED");
             Console.WriteLine($"[PSOLUTION] >> {AppSettings.VersionInfo.DATE} || {AppSettings.VersionInfo.STAGE}\n\n");
 
             ShowServerStatus();

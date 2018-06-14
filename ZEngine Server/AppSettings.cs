@@ -21,10 +21,10 @@ namespace ZEngine_Server
         public static class VersionInfo
         {
             public static string THREAD = "MASTER-THREAD";
-            public static string FULL_VERSION = "v. 1.00.8.11 ALPHA";
-            public static string VERSION = "v 1.01";
+            public static string FULL_VERSION = "v. 1.14.18.143 BETA";
+            public static string VERSION = "v 1.14";
             public static string DATE = DateTime.Today.ToShortDateString();
-            public static string STAGE = "PRE-ALPHA";
+            public static string STAGE = "BETA-VERSION";
         }
     }
 }

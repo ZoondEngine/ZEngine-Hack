@@ -35,7 +35,7 @@ namespace ZEngine_Server.Library.IDB
         {
             if(!IsConnected)
             {
-                return default(T);
+                IsConnected = Connect();
             }
 
             if(NonParsed(query))
@@ -92,8 +92,10 @@ namespace ZEngine_Server.Library.IDB
 
                     return (T)(object)true;
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    //$"[IDB]: Exception occured: {ex.Message}".ToColor(String.Colors.DarkRed);
+
                     return (T)(object)false;
                 }
             }
@@ -107,8 +109,10 @@ namespace ZEngine_Server.Library.IDB
 
                     return (T)(object)EXECUTEABLE_REQUEST;
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    //$"[IDB]: Exception occured: {ex.Message}".ToColor(String.Colors.DarkRed);
+
                     return (T)(object)NONEXECUTEABLE_REQUEST;
                 }
             }
@@ -122,8 +126,10 @@ namespace ZEngine_Server.Library.IDB
 
                     return (T)(object)1;
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    //$"[IDB]: Exception occured: {ex.Message}".ToColor(String.Colors.DarkRed);
+
                     return (T)(object)0;
                 }
             }
@@ -139,7 +145,8 @@ namespace ZEngine_Server.Library.IDB
                 }
                 catch (Exception ex)
                 {
-                    $"{ex.Message}".Error();
+                    //$"[IDB]: Exception occured: {ex.Message}".ToColor(String.Colors.DarkRed);
+
                     return default(T);
                 }
             }
@@ -161,15 +168,23 @@ namespace ZEngine_Server.Library.IDB
                 {
                     p_Connection = new MySqlConnection(CreateConnectionArgs());
                     p_Connection.Open();
+                    p_Connection.StateChange += P_Connection_StateChange;
 
                     return true;
                 }
                 catch(Exception ex)
                 {
-                    $"[EXCEPTION]: message: {ex.Message}, {ex.Source}:{ex.LineNumber()}".Error();
+                    $"[EXCEPTION]: message: {ex.Message}, {ex.Source}:{ex.LineNumber()}".ToColor(String.Colors.DarkRed);
                     return false;
                 }
             }
+        }
+
+        private void P_Connection_StateChange(object sender, System.Data.StateChangeEventArgs e)
+        {
+            p_Connection.Close();
+            IsConnected = false;
+            $"[IDB]: Connection state sucessfully restarted.".ToColor(String.Colors.Yellow);
         }
 
         private string CreateConnectionArgs(string[] args = null)
@@ -197,6 +212,8 @@ namespace ZEngine_Server.Library.IDB
             string password   = "12589635"
             )
         {
+            p_Configuration.Clear();
+
             try
             {
                 p_Configuration.Add("property_server", server);
@@ -213,14 +230,5 @@ namespace ZEngine_Server.Library.IDB
                 }
             }
         }
-        /*
-        private bool IsNormallyConfig()
-        {
-            if(!p_Configuration.ContainsKey("property_server"))
-            {
-
-            }
-        }
-        */
     }
 }
