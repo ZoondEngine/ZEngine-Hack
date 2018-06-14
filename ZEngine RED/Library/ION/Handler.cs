@@ -166,6 +166,8 @@ namespace ZEngine_RED.Library.ION
                 Thread.Sleep(1500);
                 SendAsync(PacketType.SendPing);
             }
+
+            AssertPinging();
         }
 
         public void DisableModule()
